@@ -29,6 +29,8 @@ class MessageHandler(object):
         #Setup the plugin loader
         self.plugin_loader = plugin_loader
 
+        self.socket_handler.register_handler(self.message_handler)
+
     def message_handler(self, message):
         """Handle the incoming message
 
@@ -36,7 +38,17 @@ class MessageHandler(object):
         message -- The incoming message object
         """
 
-        raise NotImplementedError("Yet to be implemented")
+        message_data = self.__message_decoder(message)
+        message_id = message_data[0]
+        plugin_name = message_data[1]
+        plugin_payload = message_data[2]
+
+        #Get the plugin executor
+        plugin_executor = self.__get_plugin_handler(plugin_name)
+
+        if plugin_executor!= False:
+            self.__handover_payload(plugin_executor, plugin_payload)
+
 
     def __get_plugin_handler(self, plugin_name):
         """Retrieve the plugin handler responsible for handling the execution
@@ -74,7 +86,7 @@ class MessageHandler(object):
         message_json = json.loads(message)
         message_id = message_json['id']
         message_payload = message_json['payload']
-        plugin_name = message_payload['plugin']
+        plugin_name = message_payload['plugin_name']
 
         return [message_id, plugin_name, message_payload]
 
