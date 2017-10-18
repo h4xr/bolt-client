@@ -108,4 +108,5 @@ class SocketHandler(object):
         message -- The incoming message
         """
 
+        print "Handling message"
         print message
