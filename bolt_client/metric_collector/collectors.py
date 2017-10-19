@@ -1,6 +1,6 @@
 '''
-File: cpu_collector.py
-Description: CPU usage collector
+File: collectors.py
+Description: System metric collectors
 Author: Saurabh Badhwar <sbadhwar@redhat.com>
 Date: 18/10/2017
 '''
