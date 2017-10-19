@@ -18,7 +18,7 @@ class Metric(object):
 
         self.metric_name = metric_name
         self.sampling_rate = sampling_rate
-        self.metric_data = []
+        self.metric_data = {}
 
     def change_sampling_rate(self, sampling_rate):
         """Change the sampling rate
@@ -29,14 +29,27 @@ class Metric(object):
 
         self.sampling_rate = sampling_rate
 
-    def record_data(self, metric):
+    def record_data(self, metric_name, metric_time, metric_value):
         """Record the new set of data
 
         Keyword arguments:
-        metric -- Tuple signifying current timestamp and metric value
+        metric_name -- The name of the metric
+        metric_time -- The timestamp for the metric
+        metric_value -- The value for the metric
         """
 
-        self.metric_data.append(metric)
+        if metric_name not in self.metric_data.keys():
+            self.metric_data[metric_name] = []
+
+        metric = (metric_time, metric_value)
+        self.metric_data[metric_name].append(metric)
+
+    def get_sampling_rate(self):
+        """Get the sampling rate for the metric
+
+        Returns:
+            Int
+        """
 
     def get_data(self):
         """Retrieve the data stored for the metric
