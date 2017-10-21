@@ -30,6 +30,8 @@ class CollectorLoader(object):
         and then load them.
         """
 
+        #Load the collector module
+        self.__load_collector_module()
         #Before we start loading the collectors, we need to get a list of available ones
         collector_list = self.__get_collector_list()
 
@@ -60,7 +62,7 @@ class CollectorLoader(object):
             List
         """
 
-        return dir(collector_module)
+        return dir(self.collector_module)
 
     def __validate_collector(self, collector_name):
         """Validate if the provided collector name is a valid collector or not
