@@ -8,7 +8,7 @@ Date: 18/10/2017
 class Metric(object):
     """Hold the details about the metric"""
 
-    def __init__(self, metric_name, sampling_rate=5):
+    def __init__(self, collector_name, sampling_rate=5):
         """Initialize the metric object
 
         Keyword arguments:
@@ -16,7 +16,7 @@ class Metric(object):
         sampling_rate -- The sampling interval at which metric should be collected
         """
 
-        self.metric_name = metric_name
+        self.collector_name = collector_name
         self.sampling_rate = sampling_rate
         self.metric_data = {}
 
@@ -50,6 +50,17 @@ class Metric(object):
         Returns:
             Int
         """
+
+        return self.sampling_rate
+
+    def get_collector_name(self):
+        """Return the name of the collector
+
+        Returns:
+            String
+        """
+
+        return self.collector_name
 
     def get_data(self):
         """Retrieve the data stored for the metric
