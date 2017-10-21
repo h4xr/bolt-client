@@ -23,7 +23,7 @@ class CpuCollector(Metric):
 
         super(CpuCollector, self).__init__('cpu', sampling_rate)
 
-    def start_sampling(self):
+    def get_sample(self):
         """Start sampling the data"""
 
         cpu_times = psutil.cpu_times()
@@ -60,7 +60,7 @@ class MemoryCollector(Metric):
 
         super(MemoryCollector, self).__init__('memory', sampling_rate)
 
-    def start_sampling(self):
+    def get_sample(self):
         """Start the data collection and recording of the data"""
 
         virtual_memory = psutil.virtual_memory()

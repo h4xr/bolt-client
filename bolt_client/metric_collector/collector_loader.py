@@ -80,6 +80,6 @@ class CollectorLoader(object):
         """
 
         collector = getattr(self.collector_module, collector_name)
-        if 'start_sampling' not in dir(collector):
+        if 'get_sample' not in dir(collector):
             return False
         return True
