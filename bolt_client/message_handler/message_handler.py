@@ -5,6 +5,7 @@ Description: Handle the incoming message request by calling in the required
 Author: Saurabh Badhwar <sbadhwar@redhat.com>
 Date: 17/10/2017
 '''
+from bolt_client.metric_collector import MetricCollector
 import json
 
 class MessageHandler(object):
@@ -31,6 +32,8 @@ class MessageHandler(object):
 
         self.socket_handler.register_handler(self.message_handler)
 
+        self.metric_collector = MetricCollector()
+
     def message_handler(self, message):
         """Handle the incoming message
 
@@ -47,8 +50,11 @@ class MessageHandler(object):
         plugin_executor = self.__get_plugin_handler(plugin_name)
 
         if plugin_executor!= False:
+            self.metric_collector.ramp_up()
             self.__handover_payload(plugin_executor, plugin_payload)
+            results = self.metric_collector.stop_sampling()
 
+        return False
 
     def __get_plugin_handler(self, plugin_name):
         """Retrieve the plugin handler responsible for handling the execution
