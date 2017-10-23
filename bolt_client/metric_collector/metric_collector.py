@@ -39,6 +39,17 @@ class MetricCollector(object):
         for thread in self.collector_threads:
             thread.start()
 
+    def ramp_up(self):
+        """Start the early metric collection
+
+        We need some metrics before starting our task execution, start the metric
+        collection and then block for some time till the data is collected before
+        handing over the control for task execution.
+        """
+
+        self.start_sampling()
+        time.sleep(30)
+
     def stop_sampling(self):
         """Stop the sampling and gather the collected results
 
