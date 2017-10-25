@@ -53,8 +53,11 @@ class MessageHandler(object):
             self.metric_collector.ramp_up()
             self.__handover_payload(plugin_executor, plugin_payload)
             results = self.metric_collector.stop_sampling()
-
-        return False
+            result_metrics = {
+                'message_id': message_id,
+                'metrics': results
+            }
+            self.socket_handler.send_message(json.dumps(result_metrics))
 
     def __get_plugin_handler(self, plugin_name):
         """Retrieve the plugin handler responsible for handling the execution
