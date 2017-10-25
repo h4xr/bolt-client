@@ -54,6 +54,7 @@ class MessageHandler(object):
             self.__handover_payload(plugin_executor, plugin_payload)
             results = self.metric_collector.stop_sampling()
             result_metrics = {
+                'host': self.socket_handler.get_client_hostname(),
                 'message_id': message_id,
                 'metrics': results
             }

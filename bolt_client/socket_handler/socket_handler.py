@@ -78,6 +78,15 @@ class SocketHandler(object):
         if self.publisher_thread != None:
             self.publisher_thread.join()
 
+    def get_client_hostname(self):
+        """Get the hostname of the client
+
+        Returns:
+            String
+        """
+
+        return self.bolt_client_host
+
     def __start_bolt_listener(self):
         """Start the listener service
 
