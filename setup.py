@@ -7,6 +7,6 @@ Date: 13/10/2017
 from setuptools import setup, find_packages
 setup(
     name='bolt_client',
-    version='0.0.1',
+    version='1.0.0_beta',
     packages=find_packages(exclude=['docs', 'tests', 'temp'])
 )
