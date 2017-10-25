@@ -60,6 +60,16 @@ class SocketHandler(object):
             self.publisher_thread.daemon = True
             self.publisher_thread.start()
 
+    def send_message(self, message):
+        """Send a message over the publisher interface
+
+        Keyword arguments:
+        message -- The message to be sent over the publisher interface
+        """
+
+        if self.publisher_thread:
+            self.publisher.sendall(message)
+
     def stop_listening(self):
         """Stop listening to the incoming messages"""
 
